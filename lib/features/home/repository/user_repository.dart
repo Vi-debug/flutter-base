@@ -1,12 +1,15 @@
-import 'package:riverpod_example/api/app_api.dart';
+import 'package:riverpod_example/services/api/app_api.dart';
+import 'package:riverpod_example/services/secure_storage/secure_storage.dart';
 
 import '../models/user.dart';
 
 class UserRepository {
 
-  final AppApi _appApi = AppApi.instance;
+  final _appApi = AppApi.instance;
 
-  final UserUltilities userUltilities = UserUltilities();
+  final _secureStorage = SecureStorage.instance;
+
+  final userUltilities = UserUltilities();
 
   Future<List<User>> getAllUsers() async {
     final data = await _appApi.sendGetRequest('https://randomuser.me/api/');

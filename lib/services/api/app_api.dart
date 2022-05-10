@@ -1,14 +1,17 @@
 import 'package:dio/dio.dart';
+import 'package:riverpod_example/services/api/api_url.dart';
+import 'package:riverpod_example/services/secure_storage/secure_storage.dart';
 
-import '../const/api_url.dart';
 
 const connectionTimeOut = 5000;
 
 class AppApi {
 
-  static Dio dio = Dio();
-
   static final instance = AppApi._();
+
+  Dio dio = Dio();
+
+  final _secureStorage = SecureStorage.instance;
 
   AppApi._() {
     dio.options.connectTimeout = connectionTimeOut;
@@ -61,7 +64,7 @@ class AppApi {
   }
 
   Future<Map<String, dynamic>> _getBaseHeader() async {
-    // final String token = await StorageApp.getTokenAuthen();
+    final String token = await _secureStorage.getTokenAuthen();
     Map<String, String> map = {
       // 'Authorization': 'Bearer $token',
     };

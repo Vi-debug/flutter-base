@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_example/repository/user_repository.dart';
+import 'package:riverpod_example/features/home/repository/user_repository.dart';
 
 import '../models/user.dart';
 
