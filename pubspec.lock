@@ -375,6 +375,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  screen_loader:
+    dependency: "direct main"
+    description:
+      name: screen_loader
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
   shelf:
     dependency: transitive
     description:
@@ -436,6 +443,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  stream_mixin:
+    dependency: transitive
+    description:
+      name: stream_mixin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.4"
   stream_transform:
     dependency: transitive
     description:
