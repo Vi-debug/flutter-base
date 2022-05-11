@@ -1,49 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
-  static final headLineLarge = TextStyle(
-    fontSize: 32.w,
+  static const headLineLarge = TextStyle(
+    fontSize: 32,
     fontWeight: FontWeight.w600,
   );
 
-  static final headLineMedium = TextStyle(
-    fontSize: 28.w,
+  static const headLineMedium = TextStyle(
+    fontSize: 28,
     fontWeight: FontWeight.w600,
   );
 
-  static final headLineSmall = TextStyle(
-    fontSize: 24.w,
+  static const headLineSmall = TextStyle(
+    fontSize: 24,
     fontWeight: FontWeight.w600,
   );
 
-  static final titleLarge = TextStyle(
-    fontSize: 22.w,
+  static const titleLarge = TextStyle(
+    fontSize: 22,
     fontWeight: FontWeight.w500,
   );
 
-  static final titleMedium = TextStyle(
-    fontSize: 16.w,
+  static const titleMedium = TextStyle(
+    fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 
-  static final titleSmall = TextStyle(
-    fontSize: 14.w,
+  static const titleSmall = TextStyle(
+    fontSize: 14,
     fontWeight: FontWeight.w500,
   );
 
-  static final bodyLarge = TextStyle(
-    fontSize: 16.w,
+  static const bodyLarge = TextStyle(
+    fontSize: 16,
     fontWeight: FontWeight.w500,
   );
 
-  static final bodyMedium = TextStyle(
-    fontSize: 14.w,
+  static const bodyMedium = TextStyle(
+    fontSize: 14,
     fontWeight: FontWeight.w500,
   );
 
-  static final bodySmall = TextStyle(
-    fontSize: 12.w,
+  static const bodySmall = TextStyle(
+    fontSize: 12,
     fontWeight: FontWeight.w500,
   );
 }
