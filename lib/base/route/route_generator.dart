@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_example/base/route/route_const.dart';
-import 'package:riverpod_example/features/home/screens/home.dart';
+import 'package:riverpod_example/presentation/login/login.dart';
+
+import '../../presentation/home/home.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
       case Routes.initialRoute:
-        return MaterialPageRoute(
-            builder: (context) => const MyHomePage(title: 'Base flutter'));
+        return MaterialPageRoute(builder: (context) => const Login());
+      case Routes.homeRoute:
+        if (args is String) {
+          final title = args as String;
+          return MaterialPageRoute(
+              builder: (context) => MyHomePage(title: title));
+        }
+        return _buildErrorRoute();
       default:
         return _buildErrorRoute();
     }

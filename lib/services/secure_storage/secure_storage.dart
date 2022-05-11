@@ -8,8 +8,8 @@ class SecureStorage {
 
   static const _storage = FlutterSecureStorage();
 
-  Future<String> getTokenAuthen() async {
-    String token = await _storage.read(key: keyTokenAuth) ?? '';
+  Future<String?> getTokenAuthen() async {
+    String? token = await _storage.read(key: keyTokenAuth);
     return token;
   }
 
@@ -17,8 +17,8 @@ class SecureStorage {
     await _storage.write(key: keyTokenAuth, value: value);
   }
 
-  Future<String> getApiKey() async {
-    String token = await _storage.read(key: apiKey) ?? '';
+  Future<String?> getApiKey() async {
+    String? token = await _storage.read(key: apiKey);
     return token;
   }
 

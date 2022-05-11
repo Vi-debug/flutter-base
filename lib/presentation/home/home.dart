@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_example/base/extension/async_value_extension.dart';
-import 'package:riverpod_example/features/home/controller/user_controller.dart';
-import 'package:riverpod_example/features/home/models/user.dart';
+
+import '../../../../base/widgets/custom_loading.dart';
+import '../../../../base/extension/async_value_extension.dart';
+import '../../controller/user_controller/user_controller.dart';
+import '../../models/user/user.dart';
 
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -20,7 +22,7 @@ class MyHomePage extends ConsumerWidget {
       children: [
         Scaffold(
           appBar: AppBar(
-            title: const Text('Riverpod demo'),
+            title: Text(title),
           ),
           body: Center(
             child: Padding(
@@ -50,12 +52,14 @@ class MyHomePage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
+                heroTag: 'add',
                 onPressed: () {
                   ref.read(listUserProvider.notifier).getAllUsers();
                 },
                 child: const Icon(Icons.add),
               ),
               FloatingActionButton(
+                heroTag: 'remove',
                 onPressed: () {
                   ref.read(listUserProvider.notifier).removeAllUser();
                 },
@@ -64,20 +68,7 @@ class MyHomePage extends ConsumerWidget {
             ],
           ),
         ),
-        Visibility(
-          visible: listUserAsyncValue.isLoading,
-          child: Positioned.fill(
-            child: Container(
-              color: Colors.black26,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  CircularProgressIndicator(),
-                ],
-              ),
-            ),
-          ),
-        ),
+        Loading(visible: listUserAsyncValue.isLoading),
       ],
     );
   }

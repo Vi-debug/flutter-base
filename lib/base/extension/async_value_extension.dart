@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_example/base/models/base_error.dart';
+
+import '../models/base_error.dart';
 
 extension AsyncValueExtension on AsyncValue {
   // isLoading shorthand (AsyncLoading is a subclass of AsycValue)
