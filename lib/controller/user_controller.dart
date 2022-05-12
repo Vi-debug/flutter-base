@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/user/user.dart';
-import '../../repository/user_repository/user_repository.dart';
+import '../models/user/user.dart';
+import '../repository/user_repository/user_repository.dart';
 
 final listUserProvider =
     StateNotifierProvider<UserController, AsyncValue<List<User>>>((ref) {

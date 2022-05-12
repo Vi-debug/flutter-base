@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_example/base/extension/widget_ref_extension.dart';
 
 import '../../../../base/widgets/custom_loading.dart';
 import '../../../../base/extension/async_value_extension.dart';
-import '../../controller/user_controller/user_controller.dart';
+import '../../controller/user_controller.dart';
 import '../../models/user/user.dart';
 
 class MyHomePage extends ConsumerWidget {
@@ -16,8 +17,13 @@ class MyHomePage extends ConsumerWidget {
     final AsyncValue<List<User>> listUserAsyncValue =
         ref.watch(listUserProvider);
 
-    ref.listen<AsyncValue<List<User>>>(
-        listUserProvider, (e, state) => state.showSnackBarOnError(context));
+    ref.listenAsyncValue<AsyncValue<List<User>>>(
+      listUserProvider,
+      context,
+      onFinishLoading: (prev, next) {
+        // implement action after finish loading here. Ex: show dialoag
+      },
+    );
     return Stack(
       children: [
         Scaffold(

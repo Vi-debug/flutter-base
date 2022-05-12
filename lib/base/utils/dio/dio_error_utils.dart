@@ -16,14 +16,14 @@ class DioErrorUtil {
           break;
         case DioErrorType.other:
           errorDescription =
-          "Connection to API server failed due to internet connection";
+              "Connection to API server failed due to internet connection";
           break;
         case DioErrorType.receiveTimeout:
           errorDescription = "Receive timeout in connection with API server";
           break;
         case DioErrorType.response:
           errorDescription =
-          "Received invalid status code: ${error.response?.statusCode ?? "unknow"}";
+              "Received invalid status code: ${error.response?.statusCode ?? "unknow"}";
           break;
         case DioErrorType.sendTimeout:
           errorDescription = "Send timeout in connection with API server";
@@ -35,7 +35,9 @@ class DioErrorUtil {
     return errorDescription;
   }
 
-  static bool isResponseError(Map<String,dynamic> response) {
-    return response.containsKey("message") && response.containsKey("status") && response["status"] == "BAD_REQUEST";
+  static bool isResponseError(Map<String, dynamic> response) {
+    return response.containsKey("message") &&
+        response.containsKey("status") &&
+        response["status"] == "BAD_REQUEST";
   }
 }

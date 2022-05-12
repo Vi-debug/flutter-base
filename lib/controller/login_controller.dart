@@ -1,7 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_example/base/config/config.dart';
-import 'package:riverpod_example/services/secure_storage/secure_storage.dart';
+import 'package:riverpod_example/base/models/base_error.dart';
+
+import '../base/config/config.dart';
+import '../base/route/route_const.dart';
+import '../repository/login_repository/login_repository.dart';
 
 final loginProvider =
     StateNotifierProvider<LoginController, AsyncValue<void>>((ref) {
@@ -11,12 +15,13 @@ final loginProvider =
 class LoginController extends StateNotifier<AsyncValue<void>> {
   LoginController() : super(const AsyncValue.data(null));
 
-  // remember config android and ios before implement login
+  final loginRepository = LoginRepository();
+
   final appAuth = const FlutterAppAuth();
 
+  // remember config android and ios before implement login
   void login() async {
     try {
-      print(clientID);
       state = const AsyncValue.loading();
       final result = await appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
@@ -27,11 +32,15 @@ class LoginController extends StateNotifier<AsyncValue<void>> {
           // promptValues: ['login']
         ),
       );
-      final accessToken = result?.accessToken ?? '';
-      await SecureStorage.instance.setTokenAuthen(accessToken);
-      state = const AsyncValue.data(null);
+      final accessToken = result?.accessToken;
+      if (accessToken != null) {
+        loginRepository.saveAcessToken(accessToken);
+        state = const AsyncValue.data(null);
+      } else {
+        state = const AsyncValue.error('Login Error');
+      }
     } catch (e) {
-      state = AsyncValue.error(e);
+      state = const AsyncValue.error('Login Error');
     }
   }
 }
