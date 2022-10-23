@@ -33,7 +33,7 @@ class LoginController extends ChangeNotifier {
         CommonUtils.showSnackBar(context, "No token");
       }
     } catch (e) {
-      CommonUtils.showSnackBar(context, BaseError.fromError(e).message);
+      CommonUtils.showErrorModal(context, "Login Error", BaseError.fromError(e).message);
     } finally {
       isLoading = false;
       notifyListeners();
@@ -49,7 +49,7 @@ class LoginController extends ChangeNotifier {
               .pushNamed(Routes.homeRoute, arguments: 'From Home with token');
       }
     } catch (e) {
-      // trigger err
+      CommonUtils.showErrorModal(context, "Token Error", BaseError.fromError(e).message);
     } finally {
       isLoading = false;
       notifyListeners();

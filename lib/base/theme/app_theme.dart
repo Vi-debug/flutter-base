@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_example/base/theme/font_family.dart';
 
 class AppTheme {
   static const headLineLarge = TextStyle(
@@ -12,6 +13,7 @@ class AppTheme {
   );
 
   static const headLineSmall = TextStyle(
+    fontFamily: FontFamily.roboto,
     fontSize: 24,
     fontWeight: FontWeight.w600,
   );

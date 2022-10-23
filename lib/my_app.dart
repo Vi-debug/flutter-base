@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:provider/provider.dart';
+import 'package:riverpod_example/base/theme/theme_const.dart';
+import 'package:riverpod_example/base/theme/theme_controller.dart';
 
 import 'base/route/route_const.dart';
 import 'base/route/route_generator.dart';
-import 'base/theme/app_theme.dart';
-import 'const/font_family.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-        fontFamily: FontFamily.roboto,
-        textTheme: const TextTheme(
-          headlineLarge: AppTheme.headLineLarge,
-          headlineMedium: AppTheme.headLineMedium,
-          headlineSmall: AppTheme.headLineSmall,
-          titleLarge: AppTheme.titleLarge,
-          titleMedium: AppTheme.titleMedium,
-          titleSmall: AppTheme.titleSmall,
-          bodyLarge: AppTheme.bodyLarge,
-          bodyMedium: AppTheme.bodyMedium,
-          bodySmall: AppTheme.bodySmall,
-        ),
-      ),
-      initialRoute: Routes.initialRoute,
-      onGenerateRoute: RouteGenerator.generateRoute,
+    return Consumer<ThemeController>(
+      builder: (ctx, themeController, _) {
+        return MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: themeController.themeMode,
+          initialRoute: Routes.initialRoute,
+          onGenerateRoute: RouteGenerator.generateRoute,
+        );
+      }
     );
   }
 }

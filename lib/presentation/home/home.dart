@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:riverpod_example/base/theme/theme_controller.dart';
 
-import '../../../../base/widgets/custom_loading.dart';
+import '../../base/widgets/component/loading.dart';
 import '../../controller/home_controller.dart';
-import '../../models/user/user.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -16,7 +17,21 @@ class MyHomePage extends StatelessWidget {
       children: [
         Scaffold(
           appBar: AppBar(
-            title: Text(title),
+            title: Row(
+              children: [
+                const Text('hello').tr(),
+                Text(' ' + title, style: Theme.of(context).textTheme.headlineSmall,),
+              ],
+            ),
+            actions: [
+              Consumer<ThemeController>(
+                builder: (context, themeController, _) {
+                  return Switch(value: themeController.themeMode == ThemeMode.dark, onChanged: (value) {
+                    Provider.of<ThemeController>(context, listen: false).toggleTheme(value);
+                  });
+                }
+              )
+            ],
           ),
           body: Center(
             child: Padding(
