@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:riverpod_example/base/config/config.dart';
 import 'package:riverpod_example/base/theme/theme_controller.dart';
 
 import '../../base/widgets/component/loading.dart';
@@ -20,7 +21,7 @@ class MyHomePage extends StatelessWidget {
             title: Row(
               children: [
                 const Text('hello').tr(),
-                Text(' ' + title, style: Theme.of(context).textTheme.headlineSmall,),
+                Text(' ' + title),
               ],
             ),
             actions: [

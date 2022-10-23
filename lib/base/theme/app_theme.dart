@@ -13,7 +13,6 @@ class AppTheme {
   );
 
   static const headLineSmall = TextStyle(
-    fontFamily: FontFamily.roboto,
     fontSize: 24,
     fontWeight: FontWeight.w600,
   );

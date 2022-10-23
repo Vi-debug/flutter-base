@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:riverpod_example/base/config/config.dart';
 import 'package:riverpod_example/base/theme/theme_controller.dart';
 import 'package:riverpod_example/controller/home_controller.dart';
 import 'package:riverpod_example/controller/login_controller.dart';
@@ -11,7 +12,7 @@ import 'package:riverpod_example/controller/login_controller.dart';
 import 'my_app.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: Environment.fileName);
   await EasyLocalization.ensureInitialized();
   await initHiveStorage();
   runApp(

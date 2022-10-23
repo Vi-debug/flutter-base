@@ -19,9 +19,9 @@ class LoginController extends ChangeNotifier {
       isLoading = true;
       final result = await appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
-          clientID,
-          redirectUrl,
-          issuer: host,
+          Environment.clientID,
+          Environment.redirectUrl,
+          issuer: Environment.host,
           scopes: ['openid', 'profile', 'offline_access'],
           // promptValues: ['login']
         ),
