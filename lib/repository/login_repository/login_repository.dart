@@ -8,7 +8,7 @@ class LoginRepository {
   }
 
   Future<bool> hasAcessToken() async {
-    final token = await _secureStorage.getApiKey();
+    final token = await _secureStorage.getTokenAuthen();
     return token != null;
   }
 }

@@ -6,7 +6,7 @@ class BaseError {
 
   BaseError({this.statusCode, required this.message});
 
-  factory BaseError.fromError(Object error, StackTrace? stackTrace) {
+  factory BaseError.fromError(Object error) {
     String errorContent = DioErrorUtil.handleError(error);
     return BaseError(message: errorContent);
   }

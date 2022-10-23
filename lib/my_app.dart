@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
         fontFamily: FontFamily.roboto,
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headlineLarge: AppTheme.headLineLarge,
           headlineMedium: AppTheme.headLineMedium,
           headlineSmall: AppTheme.headLineSmall,

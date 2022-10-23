@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_example/base/extension/widget_ref_extension.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../base/widgets/custom_loading.dart';
-import '../../../../base/extension/async_value_extension.dart';
-import '../../controller/user_controller.dart';
+import '../../controller/home_controller.dart';
 import '../../models/user/user.dart';
 
-class MyHomePage extends ConsumerWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<User>> listUserAsyncValue =
-        ref.watch(listUserProvider);
-
-    ref.listenAsyncValue<AsyncValue<List<User>>>(
-      listUserProvider,
-      context,
-      onFinishLoading: (prev, next) {
-        // implement action after finish loading here. Ex: show dialoag
-      },
-    );
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         Scaffold(
@@ -33,24 +21,22 @@ class MyHomePage extends ConsumerWidget {
           body: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: listUserAsyncValue.when(
-                data: (listUser) => ListView.builder(
-                  itemCount: listUser.length,
+              child: Consumer<HomeController>(
+                builder: (_, data, child) => ListView.builder(
+                  itemCount: data.listUser.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Text(listUser[index].gender),
+                          Text(data.listUser[index].gender),
                           const SizedBox(width: 20),
-                          Text(listUser[index].email),
+                          Text(data.listUser[index].email),
                         ],
                       ),
                     );
                   },
                 ),
-                error: (_, __) => null,
-                loading: () => null,
               ),
             ),
           ),
@@ -60,22 +46,28 @@ class MyHomePage extends ConsumerWidget {
               FloatingActionButton(
                 heroTag: 'add',
                 onPressed: () {
-                  ref.read(listUserProvider.notifier).getAllUsers();
+                  getController(context).getAllUsers(context);
                 },
                 child: const Icon(Icons.add),
               ),
               FloatingActionButton(
                 heroTag: 'remove',
                 onPressed: () {
-                  ref.read(listUserProvider.notifier).removeAllUser();
+                  getController(context).removeAllUser();
                 },
                 child: const Icon(Icons.restore_from_trash),
               )
             ],
           ),
         ),
-        Loading(visible: listUserAsyncValue.isLoading),
+        Consumer<HomeController>(
+          builder: (_, data, child) => Loading(visible: data.isLoading),
+        )
       ],
     );
+  }
+
+  HomeController getController(BuildContext context) {
+    return Provider.of<HomeController>(context, listen: false);
   }
 }

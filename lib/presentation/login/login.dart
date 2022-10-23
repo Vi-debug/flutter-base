@@ -1,41 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_example/base/extension/widget_ref_extension.dart';
-import 'package:riverpod_example/controller/check_token_controller.dart';
+import 'package:provider/provider.dart';
 
 import '../../base/route/route_const.dart';
 import '../../controller/login_controller.dart';
 
-class Login extends ConsumerStatefulWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends ConsumerState<Login> {
+class _LoginState extends State<Login> {
+
   @override
   void initState() {
-    checkHasToken();
+    getController().checkHasToken(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
-    ref.listenAsyncValue(loginProvider, context);
-
-    ref.listenAsyncValue<AsyncValue<bool>>(
-      checkTokenProvider,
-      context,
-      onFinishLoading: (prev, next) {
-        if (next is AsyncData && next.value!) {
-          Navigator.of(context)
-              .pushNamed(Routes.homeRoute, arguments: 'From Home with token');
-        }
-      },
-    );
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
@@ -52,11 +37,12 @@ class _LoginState extends ConsumerState<Login> {
     );
   }
 
-  void checkHasToken() async {
-    ref.read(checkTokenProvider.notifier).checkHasToken();
-  }
 
   void login(BuildContext context) async {
-    ref.read(loginProvider.notifier).login();
+    getController().login(context);
+  }
+
+  LoginController getController() {
+    return Provider.of<LoginController>(context, listen: false);
   }
 }

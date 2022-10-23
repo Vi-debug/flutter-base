@@ -9,10 +9,10 @@ class RouteGenerator {
     final args = settings.arguments;
     switch (settings.name) {
       case Routes.initialRoute:
-        return MaterialPageRoute(builder: (context) => const Login());
+        return MaterialPageRoute(builder: (context) => MyHomePage(title: "title"));
       case Routes.homeRoute:
         if (args is String) {
-          final title = args as String;
+          final title = args;
           return MaterialPageRoute(
               builder: (context) => MyHomePage(title: title));
         }
